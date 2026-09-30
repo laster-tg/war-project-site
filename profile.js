@@ -29,9 +29,10 @@
     reader.onload = () => { image.src = reader.result; };
     image.onerror = () => reject(new Error('Не удалось открыть изображение.'));
     image.onload = () => {
-      const canvas = document.createElement('canvas'); canvas.width = 256; canvas.height = 256;
-      const context = canvas.getContext('2d'); const scale = Math.min(256 / image.naturalWidth, 256 / image.naturalHeight); const width = Math.round(image.naturalWidth * scale); const height = Math.round(image.naturalHeight * scale);
-      context.fillStyle = '#0a120f'; context.fillRect(0, 0, 256, 256); context.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight, Math.round((256 - width) / 2), Math.round((256 - height) / 2), width, height);
+      const maxSide = 320; const scale = Math.min(1, maxSide / Math.max(image.naturalWidth, image.naturalHeight));
+      const width = Math.max(1, Math.round(image.naturalWidth * scale)); const height = Math.max(1, Math.round(image.naturalHeight * scale));
+      const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
+      canvas.getContext('2d').drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight, 0, 0, width, height);
       let quality = .86, data = canvas.toDataURL('image/webp', quality);
       while (data.length > 170000 && quality > .42) { quality -= .1; data = canvas.toDataURL('image/webp', quality); }
       if (data.length > 180000) return reject(new Error('Изображение слишком большое.'));
