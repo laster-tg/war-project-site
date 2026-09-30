@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://war-project-api.goverussia.workers.dev; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
+  <meta name="theme-color" content="#080d0c"><title>Профиль — War Project</title>
+  <link rel="stylesheet" href="style-v8.css?v=3">
+</head>
+<body class="profile-page">
+  <div class="page-grid"></div>
+  <header class="header wrap"><a class="brand" href="index.html" aria-label="На главную"><span>W</span><b>WAR PROJECT</b></a><a class="profile-back" href="index.html">← НА ГЛАВНУЮ</a></header>
+  <main class="profile-wrap wrap">
+    <section class="profile-hero" id="profileContent" hidden>
+      <p class="kicker">WAR PROJECT ID / ПРОФИЛЬ ИГРОКА</p>
+      <div class="profile-head"><div class="profile-avatar" id="profileAvatar">W</div><div><h1 id="profileUsername">ИГРОК</h1><p id="profileCreated">Создан: —</p></div></div>
+      <div class="profile-grid">
+        <article><span>ПОСТОЯННЫЙ ID</span><code id="accountId">—</code><small>Этот ID закреплён за аккаунтом и не меняется.</small></article>
+        <article><span>НИК В ИГРЕ</span><strong id="accountNick">—</strong><small>Используется на сайте и в лаунчере.</small></article>
+        <article><span>СТАТУС</span><strong id="accountRole">Игрок</strong><small>Уровень доступа War Project.</small></article>
+      </div>
+      <section class="email-card"><div><p class="kicker">СВЯЗЬ С АККАУНТОМ</p><h2>ПРИВЯЗАТЬ ПОЧТУ</h2><p>Почта сохраняется в профиле для будущих уведомлений и восстановления доступа.</p></div><form id="emailForm"><label for="accountEmail">EMAIL</label><input id="accountEmail" type="email" autocomplete="email" placeholder="name@example.com" maxlength="120"><div id="emailMessage" class="form-message" aria-live="polite"></div><button class="primary" type="submit">СОХРАНИТЬ ПОЧТУ →</button></form></section>
+      <button class="logout" id="profileLogout" type="button">ВЫЙТИ ИЗ АККАУНТА</button>
+    </section>
+    <section class="profile-locked" id="profileLocked"><p class="kicker">WAR PROJECT ID</p><h1>НУЖЕН ВХОД</h1><p>Войди через главную страницу, чтобы открыть свой профиль.</p><a class="primary" href="index.html#account">ВОЙТИ В АККАУНТ →</a></section>
+  </main>
+  <script src="api-config.js?v=10"></script><script src="profile.js?v=2"></script>
+</body></html>
