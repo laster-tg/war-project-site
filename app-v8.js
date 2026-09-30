@@ -146,18 +146,27 @@
     } catch (error) { say('#supportMessage', error.message || 'Не удалось отправить заявку.', 'error'); }
   });
   const setStat = (id, value) => { const node = $(id); if (node) node.textContent = value; };
-  const loadStats = async () => {
-    if (!api) return;
+  const applyServerStats = server => {
+    setStat('#serverState', server.online ? 'ОНЛАЙН' : 'НЕТ СВЯЗИ');
+    setStat('#serverPlayers', Number.isFinite(server.playersOnline) ? server.playersOnline : '—');
+    setStat('#serverMax', server.online && Number.isFinite(server.maxPlayers) ? '/ ' + server.maxPlayers : 'игроков');
+  };
+  const loadServerFallback = async () => {
     try {
+      const response = await fetch('https://api.mcsrvstat.us/3/rails-depart.tun.ply.gg');
+      const data = await response.json(); const players = data.players || {};
+      applyServerStats({ online: data.online === true, playersOnline: Number(players.online), maxPlayers: Number(players.max) });
+    } catch { applyServerStats({ online: false }); }
+  };
+  const loadStats = async () => {
+    try {
+      if (!api) throw new Error('API недоступен');
       if (token()) await request('/presence', { method: 'POST', headers: { Authorization: 'Bearer ' + token() } });
       const stats = await request('/stats');
-      const server = stats.server || {};
-      setStat('#serverState', server.online ? 'ОНЛАЙН' : 'ОФФЛАЙН');
-      setStat('#serverPlayers', Number.isFinite(server.playersOnline) ? server.playersOnline : '—');
-      setStat('#serverMax', server.online && Number.isFinite(server.maxPlayers) ? '/ ' + server.maxPlayers : 'игроков');
+      applyServerStats(stats.server || {});
       setStat('#siteOnline', Number.isFinite(stats.siteOnline) ? stats.siteOnline : '—');
       setStat('#registeredUsers', Number.isFinite(stats.registeredUsers) ? stats.registeredUsers : '—');
-    } catch { setStat('#serverState', 'НЕТ СВЯЗИ'); }
+    } catch { await loadServerFallback(); }
   };
   loadStats();
   setInterval(loadStats, 60000);
@@ -165,3 +174,4 @@
   if (location.hash === '#account') open('#accountModal');
   if (location.hash === '#support') open('#supportModal');
 })();
+
