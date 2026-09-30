@@ -15,4 +15,5 @@
   document.querySelector('#languageToggle')?.addEventListener('click',()=>{const m=document.querySelector('#languageMenu');m.hidden=!m.hidden});document.querySelectorAll('#languageMenu button').forEach(btn=>btn.addEventListener('click',()=>apply(btn.dataset.lang)));apply(localStorage.getItem('war-project-language')||'ru');
 })();
 
-\n(()=>{const l=localStorage.getItem('war-project-language')||'ru',d={ru:{account:'Аккаунт',status:'Состояние связи'},uk:{account:'Акаунт',status:'Стан зв’язку'},en:{account:'Account',status:'Connection status'}}[l]||{};const a=document.querySelector('.account-link');if(a&&a.childNodes[1])a.childNodes[1].nodeValue=d.account;const s=document.querySelector('.hero-note .eyebrow');if(s)s.textContent=d.status;})();\n
+
+\n(()=>{const l=localStorage.getItem('war-project-language')||'ru',d={ru:{account:'Аккаунт',status:'Состояние связи'},uk:{account:'Акаунт',status:'Стан зв’язку'},en:{account:'Account',status:'Connection status'}}[l]||{};const a=document.querySelector('.account-link');if(a&&a.childNodes[1])a.childNodes[1].nodeValue=d.account;const s=document.querySelector('.hero-note .eyebrow');if(s)s.textContent=d.status;})();
