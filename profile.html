@@ -19,9 +19,9 @@
         <article><span>СТАТУС</span><strong id="accountRole">Игрок</strong><small>Уровень доступа War Project.</small></article>
       </div>
       <section class="email-card"><div><p class="kicker">СВЯЗЬ С АККАУНТОМ</p><h2>ПРИВЯЗАТЬ ПОЧТУ</h2><p>Почта сохраняется в профиле для будущих уведомлений и восстановления доступа.</p></div><form id="emailForm"><label for="accountEmail">EMAIL</label><input id="accountEmail" type="email" autocomplete="email" placeholder="name@example.com" maxlength="120"><div id="emailMessage" class="form-message" aria-live="polite"></div><button class="primary" type="submit">СОХРАНИТЬ ПОЧТУ →</button></form></section>
-      <button class="logout" id="profileLogout" type="button">ВЫЙТИ ИЗ АККАУНТА</button>
+      <section class="twofa-card"><div><p class="kicker">ЗАЩИТА АККАУНТА</p><h2>GOOGLE AUTHENTICATOR</h2><p id="twoFactorStatus">Проверяем статус защиты…</p></div><div class="twofa-action"><div id="twoFactorSetup" hidden><img id="totpQr" alt="QR-код для Google Authenticator"><p class="totp-key">КЛЮЧ: <code id="totpSecret">—</code></p></div><label for="totpCode">6-ЗНАЧНЫЙ КОД</label><input id="totpCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000"><div id="twoFactorMessage" class="form-message" aria-live="polite"></div><button class="primary" id="twoFactorButton" type="button">ПОДКЛЮЧИТЬ 2FA →</button></div></section><button class="logout" id="profileLogout" type="button">ВЫЙТИ ИЗ АККАУНТА</button>
     </section>
     <section class="profile-locked" id="profileLocked"><p class="kicker">WAR PROJECT ID</p><h1>НУЖЕН ВХОД</h1><p>Войди через главную страницу, чтобы открыть свой профиль.</p><a class="primary" href="index.html#account">ВОЙТИ В АККАУНТ →</a></section>
   </main>
-  <script src="api-config.js?v=10"></script><script src="profile.js?v=3"></script>
+  <script src="api-config.js?v=10"></script><script src="assets/qrcode.js?v=1"></script><script src="profile.js?v=4"></script>
 </body></html>
