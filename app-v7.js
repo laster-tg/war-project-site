@@ -21,8 +21,10 @@ const applyProfile = (user) => {
   document.querySelector('#profileInitial').textContent = user.username.slice(0, 1).toUpperCase();
   accountNav.textContent = user.username;
   authForm.hidden = true; profilePanel.hidden = false;
+  const admin = document.querySelector('#adminLink'); if (admin) admin.hidden = user.role !== 'admin';
 };
 const signedOut = () => { accountNav.textContent = 'Аккаунт'; authForm.hidden = false; profilePanel.hidden = true; };
+document.querySelectorAll('[data-action^="privilege:"]').forEach(button => button.addEventListener('click', () => { document.querySelector('#requestType').value = button.dataset.action; document.querySelector('#modalTitle').textContent = 'Заявка на привилегию'; document.querySelector('#supportModal').classList.add('show'); }));
 const loadProfile = async () => {
   if (!token()) return signedOut();
   try { const { user } = await request('/account/me', { headers: { Authorization: `Bearer ${token()}` } }); applyProfile(user); }
@@ -40,8 +42,7 @@ authForm.addEventListener('submit', async e => {
   catch (error) { message('#authMessage', friendlyError(error), 'error'); }
   finally { submit.disabled = false; }
 });
-document.querySelector('#logoutButton').addEventListener('click', () => { localStorage.removeItem(tokenKey); signedOut(); message('#authMessage', 'Вы вышли из аккаунта.', 'success'); });
-const actionNames = { ban: 'Снятие бана', mute: 'Снятие мута', warnings: 'Снятие предупреждений' };
+document.querySelector('#logoutButton').addEventListener('click', () => { localStorage.removeItem(tokenKey); signedOut(); message('#authMessage', 'Вы вышли из аккаунта.', 'success'); });const actionNames = { ban: 'Снятие бана', mute: 'Снятие мута', warnings: 'Снятие предупреждений', 'privilege:Боец': 'Привилегия: Боец', 'privilege:Разведчик': 'Привилегия: Разведчик', 'privilege:Завоеватель': 'Привилегия: Завоеватель', 'privilege:Командир': 'Привилегия: Командир', 'privilege:Генерал': 'Привилегия: Генерал' };
 document.querySelectorAll('[data-action]').forEach(x => x.addEventListener('click', () => { document.querySelector('#supportModal').classList.add('show'); document.querySelector('#modalTitle').textContent = actionNames[x.dataset.action]; document.querySelector('#requestType').value = x.dataset.action; message('#supportMessage'); }));
 document.querySelector('#requestForm').addEventListener('submit', async e => {
   e.preventDefault(); if (!token()) { message('#supportMessage', 'Сначала войди или зарегистрируйся в War Project ID.', 'error'); return; }
