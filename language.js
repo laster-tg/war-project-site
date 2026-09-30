@@ -11,3 +11,15 @@
   document.addEventListener('click', event => { if (!event.target.closest('.language-picker')) document.querySelector('#languageMenu').hidden = true; });
   apply(saved);
 })();
+
+(() => {
+  const labels = { ru:'Русский', uk:'Українська', en:'English' };
+  const renderFlags = lang => {
+    const current = document.querySelector('#languageFlag');
+    current.textContent = '';
+    current.dataset.lang = lang;
+    document.querySelectorAll('[data-lang]').forEach(button => { const code = button.dataset.lang; button.innerHTML = '<span class="flag-icon" data-lang="' + code + '"></span>' + labels[code]; });
+  };
+  renderFlags(localStorage.getItem('war-project-language') || 'ru');
+  document.querySelectorAll('[data-lang]').forEach(button => button.addEventListener('click', () => setTimeout(() => renderFlags(button.dataset.lang), 0)));
+})();
