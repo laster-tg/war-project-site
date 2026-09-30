@@ -1,0 +1,1 @@
+window.WAR_PROJECT_API_URL = 'https://war-project-api.goverussia.workers.dev';
