@@ -110,3 +110,5 @@ a,button,label[for],input[type="file"],select{cursor:url("data:image/svg+xml,%3C
 
 /* Account window after sign-in. */
 .account-modal.signed-in .modal-lead,.account-modal.signed-in .auth-tabs{display:none}.account-modal.signed-in #accountTitle{margin-bottom:20px}.profile-line img{object-fit:contain;background:#0a120f}
+
+.profile-grid strong.role-gold{color:#ffd54a!important;text-shadow:0 0 5px #fff3a0,0 0 14px #ffbf00,0 0 28px rgba(255,183,0,.72)}

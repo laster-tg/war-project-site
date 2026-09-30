@@ -11,7 +11,7 @@
     return data;
   };
   const numericId = value => { let hash = 2166136261; for (const char of String(value || '')) { hash ^= char.charCodeAt(0); hash = Math.imul(hash, 16777619); } return String((hash >>> 0) % 900000000 + 100000000); };
-  const roleLabel = value => String(value || '').toLowerCase() === 'admin' ? 'Админ' : 'Игрок';
+  const roleLabel = value => ({ owner: 'Владелец', tech_admin: 'Техадмин' }[String(value || '').toLowerCase()] || 'Игрок');
   const render = user => {
     $('#profileLocked').hidden = true; $('#profileContent').hidden = false;
     $('#profileUsername').textContent = user.username; $('#accountNick').textContent = user.username;
@@ -56,3 +56,4 @@
   });
   load();
 })();
+
