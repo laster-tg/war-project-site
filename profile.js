@@ -26,7 +26,10 @@
     if (!/^image\/(png|jpeg|webp)$/.test(file.type)) return reject(new Error('Выбери PNG, JPG или WEBP.'));
     const image = new Image(); const reader = new FileReader();
     reader.onerror = () => reject(new Error('Не удалось прочитать изображение.'));
-    reader.onload = () => { image.src = reader.result; };
+    reader.onload = () => {
+      if (String(reader.result).length <= 170000) return resolve(String(reader.result));
+      image.src = reader.result;
+    };
     image.onerror = () => reject(new Error('Не удалось открыть изображение.'));
     image.onload = () => {
       const maxSide = 320; const scale = Math.min(1, maxSide / Math.max(image.naturalWidth, image.naturalHeight));

@@ -35,12 +35,14 @@
   };
   const signedOut = () => {
     $('#accountNav').textContent = 'Аккаунт';
+    $('#accountModal').classList.remove('signed-in');
     $('#authForm').hidden = false;
     $('#profilePanel').hidden = true;
   };
   const applyProfile = user => {
     if (!user || typeof user.username !== 'string') return signedOut();
     $('#accountNav').textContent = user.username;
+    $('#accountModal').classList.add('signed-in');
     $('#profileName').textContent = user.username;
     const avatar = $('#profileInitial');
     avatar.replaceChildren();
@@ -50,6 +52,7 @@
       image.alt = '';
       avatar.append(image);
     } else avatar.textContent = user.username.slice(0, 1).toUpperCase();
+    $('#profileId').textContent = String(user.id || '—').replace(/[^0-9]/g, '').slice(0, 9) || '—';
     $('#authForm').hidden = true;
     $('#profilePanel').hidden = false;
   };
@@ -96,14 +99,31 @@
     } catch (error) { say('#authMessage', error.message || 'Не удалось выполнить запрос.', 'error'); }
     finally { submit.disabled = false; }
   });
+  const avatarDataFromFile = file => new Promise((resolve, reject) => {
+    if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) return reject(new Error('Выбери PNG, JPG или WEBP.'));
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error('Не удалось прочитать изображение.'));
+    reader.onload = () => {
+      if (String(reader.result).length <= 170000) return resolve(String(reader.result));
+      const image = new Image();
+      image.onerror = () => reject(new Error('Не удалось открыть изображение.'));
+      image.onload = () => {
+        const scale = Math.min(1, 320 / Math.max(image.naturalWidth, image.naturalHeight));
+        const width = Math.max(1, Math.round(image.naturalWidth * scale)); const height = Math.max(1, Math.round(image.naturalHeight * scale));
+        const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
+        canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+        let quality = .86, data = canvas.toDataURL('image/webp', quality);
+        while (data.length > 170000 && quality > .42) { quality -= .1; data = canvas.toDataURL('image/webp', quality); }
+        data.length > 180000 ? reject(new Error('Изображение слишком большое.')) : resolve(data);
+      };
+      image.src = String(reader.result);
+    };
+    reader.readAsDataURL(file);
+  });
   $('#avatarInput').addEventListener('change', async event => {
     const file = event.target.files?.[0];
     if (!file) return;
-    if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type) || file.size > 128 * 1024) {
-      say('#authMessage', 'Выбери PNG, JPG или WEBP до 128 КБ.', 'error'); event.target.value = ''; return;
-    }
-    const avatarData = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result)); reader.onerror = reject; reader.readAsDataURL(file); });
-    try { applyProfile((await request('/account/avatar', { method: 'POST', headers: { Authorization: 'Bearer ' + token() }, body: JSON.stringify({ avatarData }) })).user); say('#authMessage', 'Аватарка обновлена.', 'success'); }
+    try { const avatarData = await avatarDataFromFile(file); applyProfile((await request('/account/avatar', { method: 'POST', headers: { Authorization: 'Bearer ' + token() }, body: JSON.stringify({ avatarData }) })).user); say('#authMessage', 'Аватарка обновлена.', 'success'); }
     catch (error) { say('#authMessage', error.message || 'Не удалось загрузить аватарку.', 'error'); }
     finally { event.target.value = ''; }
   });

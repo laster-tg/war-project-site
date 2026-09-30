@@ -107,3 +107,6 @@ a,button,label[for],input[type="file"],select{cursor:url("data:image/svg+xml,%3C
 @media(max-width:720px){.profile-wrap{padding:28px 0 48px}.profile-head{gap:16px;margin-bottom:28px}.profile-avatar{width:68px;height:68px;font-size:25px}.profile-grid,.email-card{grid-template-columns:1fr}.profile-grid article{min-height:130px}.email-card{gap:22px;margin-top:24px;padding:20px}.profile-back{font-size:7px}}
 
 .profile-grid strong.role-admin{color:#ff0000!important;text-shadow:0 0 14px rgba(255,0,0,.5)}
+
+/* Account window after sign-in. */
+.account-modal.signed-in .modal-lead,.account-modal.signed-in .auth-tabs{display:none}.account-modal.signed-in #accountTitle{margin-bottom:20px}.profile-line img{object-fit:contain;background:#0a120f}
