@@ -15,7 +15,7 @@
   const render = user => {
     $('#profileLocked').hidden = true; $('#profileContent').hidden = false;
     $('#profileUsername').textContent = user.username; $('#accountNick').textContent = user.username;
-    $('#accountId').textContent = numericId(user.id); const role = $('#accountRole'); role.textContent = roleLabel(user.role); role.classList.toggle('role-admin', String(user.role || '').toLowerCase() === 'admin');
+    $('#accountId').textContent = numericId(user.id); const role = $('#accountRole'); role.textContent = roleLabel(user.role); const roleKey = String(user.role || '').toLowerCase(); role.classList.toggle('role-gold', roleKey === 'owner' || roleKey === 'tech_admin');
     $('#profileCreated').textContent = 'Создан: ' + (user.createdAt ? new Date(user.createdAt).toLocaleDateString('ru-RU') : '—');
 
     const avatar = $('#profileAvatar');
@@ -56,4 +56,5 @@
   });
   load();
 })();
+
 
