@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://war-project-api.goverussia.workers.dev; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
   <meta name="theme-color" content="#080d0c"><title>Профиль — War Project</title>
-  <link rel="stylesheet" href="style-v8.css?v=4">
+  <link rel="stylesheet" href="style-v8.css?v=5">
 </head>
 <body class="profile-page">
   <div class="page-grid"></div>
@@ -12,7 +12,9 @@
   <main class="profile-wrap wrap">
     <section class="profile-hero" id="profileContent" hidden>
       <p class="kicker">WAR PROJECT ID / ПРОФИЛЬ ИГРОКА</p>
-      <div class="profile-head"><div class="profile-avatar" id="profileAvatar">W</div><div><h1 id="profileUsername">ИГРОК</h1><p id="profileCreated">Создан: —</p></div></div>
+      <div class="profile-head"><label class="profile-avatar" id="profileAvatar" title="Изменить аватар">
+        <span class="avatar-initial">W</span><span class="avatar-change">ИЗМЕНИТЬ<br>АВАТАР</span><input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp" aria-label="Выбрать новую аватарку">
+      </label><div><h1 id="profileUsername">ИГРОК</h1><p id="profileCreated">Создан: —</p></div></div>
       <div class="profile-grid">
         <article><span>ПОСТОЯННЫЙ ID</span><code id="accountId">—</code><small>Этот ID закреплён за аккаунтом и не меняется.</small></article>
         <article><span>НИК В ИГРЕ</span><strong id="accountNick">—</strong><small>Используется на сайте и в лаунчере.</small></article>
@@ -21,5 +23,5 @@
     </section>
     <section class="profile-locked" id="profileLocked"><p class="kicker">WAR PROJECT ID</p><h1>НУЖЕН ВХОД</h1><p>Войди через главную страницу, чтобы открыть свой профиль.</p><a class="primary" href="index.html#account">ВОЙТИ В АККАУНТ →</a></section>
   </main>
-  <script src="api-config.js?v=10"></script><script src="profile.js?v=5"></script>
+  <script src="api-config.js?v=10"></script><script src="profile.js?v=6"></script>
 </body></html>

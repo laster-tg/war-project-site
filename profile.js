@@ -10,7 +10,6 @@
     if (!response.ok) throw new Error(data.error || 'Ошибка сервера');
     return data;
   };
-  const say = (text, type = '') => { const node = $('#emailMessage'); node.textContent = text; node.className = 'form-message ' + type; };
   const numericId = value => { let hash = 2166136261; for (const char of String(value || '')) { hash ^= char.charCodeAt(0); hash = Math.imul(hash, 16777619); } return String((hash >>> 0) % 900000000 + 100000000); };
   const roleLabel = value => String(value || '').toLowerCase() === 'admin' ? 'Админ' : 'Игрок';
   const render = user => {
@@ -19,10 +18,37 @@
     $('#accountId').textContent = numericId(user.id); const role = $('#accountRole'); role.textContent = roleLabel(user.role); role.classList.toggle('role-admin', String(user.role || '').toLowerCase() === 'admin');
     $('#profileCreated').textContent = 'Создан: ' + (user.createdAt ? new Date(user.createdAt).toLocaleDateString('ru-RU') : '—');
 
-    const avatar = $('#profileAvatar'); avatar.replaceChildren();
-    if (typeof user.avatarData === 'string' && /^data:image\/(png|jpeg|webp);base64,/i.test(user.avatarData)) { const image = new Image(); image.src = user.avatarData; image.alt = ''; avatar.append(image); } else avatar.textContent = user.username.slice(0, 1).toUpperCase();
+    const avatar = $('#profileAvatar');
+    const initial = avatar.querySelector('.avatar-initial'); initial.replaceChildren();
+    if (typeof user.avatarData === 'string' && /^data:image\/(png|jpeg|webp);base64,/i.test(user.avatarData)) { const image = new Image(); image.src = user.avatarData; image.alt = ''; initial.append(image); } else initial.textContent = user.username.slice(0, 1).toUpperCase();
   };
+  const resizeAvatar = file => new Promise((resolve, reject) => {
+    if (!/^image\/(png|jpeg|webp)$/.test(file.type)) return reject(new Error('Выбери PNG, JPG или WEBP.'));
+    const image = new Image(); const reader = new FileReader();
+    reader.onerror = () => reject(new Error('Не удалось прочитать изображение.'));
+    reader.onload = () => { image.src = reader.result; };
+    image.onerror = () => reject(new Error('Не удалось открыть изображение.'));
+    image.onload = () => {
+      const side = Math.min(256, image.naturalWidth, image.naturalHeight); const sx = (image.naturalWidth - side) / 2; const sy = (image.naturalHeight - side) / 2;
+      const canvas = document.createElement('canvas'); canvas.width = 256; canvas.height = 256;
+      canvas.getContext('2d').drawImage(image, sx, sy, side, side, 0, 0, 256, 256);
+      let quality = .86, data = canvas.toDataURL('image/webp', quality);
+      while (data.length > 170000 && quality > .42) { quality -= .1; data = canvas.toDataURL('image/webp', quality); }
+      if (data.length > 180000) return reject(new Error('Изображение слишком большое.'));
+      resolve(data);
+    };
+    reader.readAsDataURL(file);
+  });
   const load = async () => { if (!token()) return; try { render((await request('/account/me')).user); } catch { sessionStorage.removeItem(key); localStorage.removeItem(key); } };
   $('#profileLogout').addEventListener('click', () => { sessionStorage.removeItem(key); localStorage.removeItem(key); location.href = 'index.html'; });
+  $('#avatarInput').addEventListener('change', async event => {
+    const input = event.currentTarget; const file = input.files && input.files[0]; if (!file || !token()) return;
+    const avatar = $('#profileAvatar'); avatar.classList.add('saving');
+    try {
+      const avatarData = await resizeAvatar(file); const response = await request('/account/avatar', { method: 'POST', body: JSON.stringify({ avatarData }) });
+      render(response.user); avatar.classList.add('saved'); setTimeout(() => avatar.classList.remove('saved'), 1800);
+    } catch (error) { alert(error.message || 'Не удалось изменить аватар.'); }
+    finally { input.value = ''; avatar.classList.remove('saving'); }
+  });
   load();
 })();
