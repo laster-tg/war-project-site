@@ -8,6 +8,7 @@
   <meta name="description" content="War Project — лаунчер, игровой аккаунт и центр поддержки.">
   <title>War Project — игровая база</title>
   <link rel="stylesheet" href="style-v8.css?v=4">
+  <link rel="stylesheet" href="wallet.css?v=1">
 </head>
 <body>
   <div class="page-grid"></div>
@@ -15,6 +16,7 @@
     <a class="brand" href="#top" aria-label="War Project, на главную"><span>W</span><b>WAR PROJECT</b></a>
     <nav class="nav" aria-label="Навигация">
       <a href="#start">Начать</a><a href="#privileges">Привилегии</a><a href="#support">Поддержка</a>
+      <a class="wallet-nav" href="profile.html#wallet" data-wallet-auth hidden><span data-wallet-balance>—</span> <small>WP Coins</small></a>
       <button class="account-button" data-open="#accountModal"><i></i><span id="accountNav">Аккаунт</span></button>
     </nav>
   </header>
@@ -25,7 +27,7 @@
         <h1><span>ИГРА</span><em>НАЧИНАЕТСЯ</em><span>ЗДЕСЬ.</span></h1>
         <p class="lead">Единая точка входа в War Project: лаунчер, игровой профиль, поддержка и привилегии.</p>
         <div class="hero-actions">
-          <a class="primary" href="https://github.com/laster-tg/war-project-site/releases/download/v0.2.8/War-Project-Launcher-0.2.8-Setup.exe">Скачать лаунчер 0.2.8 <b>↗</b></a>
+          <a class="primary" href="https://github.com/laster-tg/war-project-site/releases/download/v0.2.9/War-Project-Launcher-0.2.9-Setup.exe">Скачать лаунчер 0.2.9 <b>↗</b></a>
           <button class="text-button" data-open="#accountModal">Открыть профиль <b>→</b></button>
         </div>
       </div>
@@ -38,12 +40,15 @@
       <article class="stat-card"><span>03 / АККАУНТЫ</span><h2>ЗАРЕГИСТРИРОВАНО<br>ЗА ВСЁ ВРЕМЯ</h2><strong><b id="registeredUsers">6</b> <small>аккаунтов</small></strong><p>Общее число созданных War Project ID за всё время.</p></article>
     </section>
     <section class="shop" id="privileges">
-      <div class="section-title"><div><p class="kicker">04 / ПОДДЕРЖКА ПРОЕКТА</p><h2>ПРИВИЛЕГИИ</h2></div></div>
-      <div class="tiers privilege-tiers">
-        <article class="tier"><p>УРОВЕНЬ 01</p><h3>Боец</h3><span>Название своей команды, расширенный кит, личный флаг и доступ к закрытым Discord-разделам.</span><strong>50 ₴</strong><button data-action="privilege:Боец">Выбрать</button></article>
-        <article class="tier"><p>УРОВЕНЬ 02</p><h3>Разведчик</h3><span>Камуфляжный костюм, особое вооружение и обвесы, уникальный тег, команда, кит, флаг и Discord.</span><strong>75 ₴</strong><button data-action="privilege:Разведчик">Выбрать</button></article>
-        <article class="tier"><p>УРОВЕНЬ 03</p><h3>Командир</h3><span>Уникальное вооружение, особая броня и лечение, камуфляж, тег, команда, расширенный кит, флаг и Discord.</span><strong>150 ₴</strong><button data-action="privilege:Командир">Выбрать</button></article>
+      <div class="section-title"><div><p class="kicker">04 / МАГАЗИН ПРОЕКТА</p><h2>ПРИВИЛЕГИИ</h2></div></div>
+      <p class="wallet-shop-lead">Покупай привилегии за WP Coins для своего игрового аккаунта. Баланс и история покупок — в профиле.</p>
+      <div class="wallet-shop-account" data-wallet-auth hidden>ТВОЙ БАЛАНС <strong><span data-wallet-balance>—</span> WP Coins</strong><a href="profile.html#wallet">Открыть кошелёк →</a></div>
+      <div class="tiers privilege-tiers" id="privilegeCatalog" aria-busy="true">
+        <article class="tier"><p>УРОВЕНЬ 01</p><h3>Боец</h3><span>Название своей команды, расширенный кит, личный флаг и доступ к закрытым Discord-разделам.</span><strong>50 WP Coins</strong><button disabled>Загрузка…</button></article>
+        <article class="tier"><p>УРОВЕНЬ 02</p><h3>Разведчик</h3><span>Камуфляжный костюм, особое вооружение и обвесы, уникальный тег, команда, кит, флаг и Discord.</span><strong>75 WP Coins</strong><button disabled>Загрузка…</button></article>
+        <article class="tier"><p>УРОВЕНЬ 03</p><h3>Командир</h3><span>Уникальное вооружение, особая броня и лечение, камуфляж, тег, команда, расширенный кит, флаг и Discord.</span><strong>150 WP Coins</strong><button disabled>Загрузка…</button></article>
       </div>
+      <p class="wallet-help">Для пополнения обратись к владельцу или техадмину.</p><p class="form-message" id="shopMessage" aria-live="polite"></p>
     </section>
     <section class="support" id="support">
       <div class="section-title"><p class="kicker">05 / ЦЕНТР ПОДДЕРЖКИ</p><h2>НУЖНА ПОМОЩЬ?</h2></div>
@@ -57,7 +62,7 @@
   <footer class="footer wrap"><span>© 2026 WAR PROJECT</span><a href="https://discord.gg/WyPWW98Q4u" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Discord сообщества ↗</a><span>КЛИЕНТ 0.1.0</span></footer>
   <div class="modal account-modal" id="accountModal" aria-hidden="true"><section class="modal-box" role="dialog" aria-modal="true" aria-labelledby="accountTitle"><button class="close" data-close aria-label="Закрыть">×</button><p class="kicker">ИГРОВОЙ ПРОФИЛЬ</p><h2 id="accountTitle">WAR PROJECT ID</h2><p class="modal-lead">Один аккаунт для сайта, лаунчера и обращений. Пароль отправляется только в защищённый API аккаунтов.</p><div class="auth-tabs"><button class="active" data-auth-tab="login">Войти</button><button data-auth-tab="register">Регистрация</button></div><form id="authForm" novalidate><label for="authUsername">Игровой ник</label><input id="authUsername" autocomplete="username" required minlength="3" maxlength="24" placeholder="3–24 символа: буквы, цифры, _"><label for="authPassword">Пароль</label><input id="authPassword" type="password" autocomplete="current-password" required minlength="10" placeholder="Минимум 10 символов"><div id="confirmRow" hidden><label for="authConfirm">Повтори пароль</label><input id="authConfirm" type="password" autocomplete="new-password" placeholder="Повтори пароль"></div><div id="twoFactorLoginRow" hidden><label for="authTwoFactor">Код Google Authenticator</label><input id="authTwoFactor" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000"></div><div class="form-message" id="authMessage" aria-live="polite"></div><button class="primary" id="authSubmit" type="submit">Войти →</button></form><div id="profilePanel" hidden><div class="profile-line"><span id="profileInitial">W</span><div><b id="profileName">Игрок</b><small>ПОСТОЯННЫЙ WAR PROJECT ID</small><code id="profileId">—</code></div></div><a class="primary profile-page-link" href="profile.html">Открыть полный профиль →</a><label class="avatar-upload">Изменить аватарку<input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp"></label><button class="logout" id="logoutButton" type="button">Выйти из аккаунта</button></div></section></div>
   <div class="modal" id="supportModal" aria-hidden="true"><form class="modal-box" id="requestForm" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="close" data-close type="button" aria-label="Закрыть">×</button><p class="kicker">НОВАЯ ЗАЯВКА</p><h2 id="modalTitle">ЦЕНТР ПОДДЕРЖКИ</h2><p class="modal-lead">Опиши ситуацию. Для отправки нужен War Project ID.</p><input id="requestType" type="hidden"><label for="requestDetails">Комментарий</label><textarea id="requestDetails" required maxlength="500" placeholder="Коротко опиши ситуацию"></textarea><div class="form-message" id="supportMessage" aria-live="polite"></div><button class="primary" type="submit">Отправить заявку →</button></form></div>
-  <script src="api-config.js?v=9"></script><script src="app-v8.js?v=8"></script>
+  <script src="api-config.js?v=11"></script><script src="wallet.js?v=1"></script><script src="app-v8.js?v=9"></script>
 </body></html>
 
 

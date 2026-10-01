@@ -1,8 +1,8 @@
-version: 0.2.8
+version: 0.2.9
 files:
-  - url: https://github.com/laster-tg/war-project-site/releases/download/v0.2.8/War-Project-Launcher-0.2.8-Setup.exe
-    sha512: 1ZaRxcvnzX2KrozbERCzrd60yOFRwP0CorNpTkz+vS7SCCTiZN5/WNQejXJq3uSEFj5/XdzJQiiZlaNO12zarg==
-    size: 203358006
-path: https://github.com/laster-tg/war-project-site/releases/download/v0.2.8/War-Project-Launcher-0.2.8-Setup.exe
-sha512: 1ZaRxcvnzX2KrozbERCzrd60yOFRwP0CorNpTkz+vS7SCCTiZN5/WNQejXJq3uSEFj5/XdzJQiiZlaNO12zarg==
-releaseDate: '2026-10-01T12:03:01.554Z'
+  - url: https://github.com/laster-tg/war-project-site/releases/download/v0.2.9/War-Project-Launcher-0.2.9-Setup.exe
+    sha512: LNGk5dlLGXFw0txuwWlfQYf1qVSTfvqTRMVS4JIiA/+coT3u1O2sXPEBfU/7azx/ut6eqtESbQWFq9GMD90Kig==
+    size: 249163678
+path: https://github.com/laster-tg/war-project-site/releases/download/v0.2.9/War-Project-Launcher-0.2.9-Setup.exe
+sha512: LNGk5dlLGXFw0txuwWlfQYf1qVSTfvqTRMVS4JIiA/+coT3u1O2sXPEBfU/7azx/ut6eqtESbQWFq9GMD90Kig==
+releaseDate: '2026-10-01T19:34:13.360Z'
