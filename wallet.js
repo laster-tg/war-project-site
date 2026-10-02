@@ -41,14 +41,6 @@
   const renderBalance = () => {
     $$('[data-wallet-balance]').forEach(node => { node.textContent = money(wallet.balance); });
     $$('[data-wallet-auth]').forEach(node => { node.hidden = !token(); });
-    $$('.wallet-panel').forEach(panel => {
-      if ($('.wallet-coin-video', panel)) return;
-      const video = document.createElement('video');
-      video.className = 'wallet-coin-video';
-      video.src = 'assets/coin_spin.gif.mp4';
-      video.autoplay = true; video.loop = true; video.muted = true; video.playsInline = true;
-      panel.prepend(video);
-    });
   };
 
   const renderCatalog = () => {
