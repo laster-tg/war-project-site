@@ -117,3 +117,11 @@ a,button,label[for],input[type="file"],select{cursor:url("data:image/svg+xml,%3C
 
 /* Three privilege cards from the current server rules. */
 .privilege-tiers{grid-template-columns:repeat(3,minmax(0,1fr))}.privilege-tiers .tier{min-height:270px}@media(max-width:720px){.privilege-tiers{grid-template-columns:1fr}.privilege-tiers .tier{min-height:220px}}
+
+/* Community links stay side by side on every screen size. */
+.footer{align-items:center}
+.footer-socials{display:flex;align-items:center;gap:12px}
+.footer-socials a{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line);background:var(--panel);color:var(--muted);transition:color .18s ease,border-color .18s ease,background-color .18s ease}
+.footer-socials svg{display:block;width:24px;height:24px}
+.footer-socials a:hover{color:var(--acid);border-color:var(--acid);background:#16251c}
+.footer-socials a:focus-visible{color:var(--acid);outline:2px solid var(--acid);outline-offset:4px}

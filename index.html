@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#080d0c">
   <meta name="description" content="War Project — лаунчер, игровой аккаунт и центр поддержки.">
   <title>War Project — игровая база</title>
-  <link rel="stylesheet" href="style-v8.css?v=4">
+  <link rel="stylesheet" href="style-v8.css?v=5">
   <link rel="stylesheet" href="wallet.css?v=1">
 </head>
 <body>
@@ -59,7 +59,18 @@
       </div>
     </section>
   </main>
-  <footer class="footer wrap"><span>© 2026 WAR PROJECT</span><a href="https://discord.gg/WyPWW98Q4u" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Discord сообщества ↗</a><span>КЛИЕНТ 0.1.0</span></footer>
+  <footer class="footer wrap">
+    <span>© 2026 WAR PROJECT</span>
+    <nav class="footer-socials" aria-label="Сообщество War Project">
+      <a href="https://t.me/war_project_java" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="Telegram War Project" title="Telegram">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M21.7 2.3 2.4 9.7c-.9.4-.9 1.1-.2 1.3l5 1.6 1.9 5.9c.2.7.4.9.8.9s.6-.2.9-.5l2.6-2.5 5.3 3.9c1 .5 1.6.2 1.8-.9L23 3.6c.2-1-.4-1.7-1.3-1.3ZM9 12.2l10-6.3c.5-.3 1-.1.6.2l-8.3 7.5-.3 3.6-2-5Z"/></svg>
+      </a>
+      <a href="https://discord.gg/WyPWW98Q4u" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="Discord War Project" title="Discord">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.445.865-.609 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.618-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.045-.32 13.579.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.181 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.099.246.197.372.291a.077.077 0 0 1-.007.128c-.597.35-1.22.649-1.873.892a.076.076 0 0 0-.04.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.029ZM8.02 15.331c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.211 0 2.176 1.096 2.157 2.419 0 1.333-.955 2.419-2.157 2.419Zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.211 0 2.176 1.096 2.157 2.419 0 1.333-.946 2.419-2.157 2.419Z"/></svg>
+      </a>
+    </nav>
+    <span>КЛИЕНТ 0.1.0</span>
+  </footer>
   <div class="modal account-modal" id="accountModal" aria-hidden="true"><section class="modal-box" role="dialog" aria-modal="true" aria-labelledby="accountTitle"><button class="close" data-close aria-label="Закрыть">×</button><p class="kicker">ИГРОВОЙ ПРОФИЛЬ</p><h2 id="accountTitle">WAR PROJECT ID</h2><p class="modal-lead">Один аккаунт для сайта, лаунчера и обращений. Пароль отправляется только в защищённый API аккаунтов.</p><div class="auth-tabs"><button class="active" data-auth-tab="login">Войти</button><button data-auth-tab="register">Регистрация</button></div><form id="authForm" novalidate><label for="authUsername">Игровой ник</label><input id="authUsername" autocomplete="username" required minlength="3" maxlength="24" placeholder="3–24 символа: буквы, цифры, _"><label for="authPassword">Пароль</label><input id="authPassword" type="password" autocomplete="current-password" required minlength="10" placeholder="Минимум 10 символов"><div id="confirmRow" hidden><label for="authConfirm">Повтори пароль</label><input id="authConfirm" type="password" autocomplete="new-password" placeholder="Повтори пароль"></div><div id="twoFactorLoginRow" hidden><label for="authTwoFactor">Код Google Authenticator</label><input id="authTwoFactor" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000"></div><div class="form-message" id="authMessage" aria-live="polite"></div><button class="primary" id="authSubmit" type="submit">Войти →</button></form><div id="profilePanel" hidden><div class="profile-line"><span id="profileInitial">W</span><div><b id="profileName">Игрок</b><small>ПОСТОЯННЫЙ WAR PROJECT ID</small><code id="profileId">—</code></div></div><a class="primary profile-page-link" href="profile.html">Открыть полный профиль →</a><label class="avatar-upload">Изменить аватарку<input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp"></label><button class="logout" id="logoutButton" type="button">Выйти из аккаунта</button></div></section></div>
   <div class="modal" id="supportModal" aria-hidden="true"><form class="modal-box" id="requestForm" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="close" data-close type="button" aria-label="Закрыть">×</button><p class="kicker">НОВАЯ ЗАЯВКА</p><h2 id="modalTitle">ЦЕНТР ПОДДЕРЖКИ</h2><p class="modal-lead">Опиши ситуацию. Для отправки нужен War Project ID.</p><input id="requestType" type="hidden"><label for="requestDetails">Комментарий</label><textarea id="requestDetails" required maxlength="500" placeholder="Коротко опиши ситуацию"></textarea><div class="form-message" id="supportMessage" aria-live="polite"></div><button class="primary" type="submit">Отправить заявку →</button></form></div>
   <script src="api-config.js?v=11"></script><script src="wallet.js?v=1"></script><script src="app-v8.js?v=9"></script>
