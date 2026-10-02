@@ -1,27 +1,29 @@
 (() => {
   'use strict';
   const api = String(window.WAR_PROJECT_API_URL || '').replace(/\/$/, '');
+  const walletApi = String(window.WAR_PROJECT_WALLET_API_URL || window.WAR_PROJECT_API_URL || '').replace(/\/$/, '');
   const key = 'war-project-session';
   const token = () => sessionStorage.getItem(key) || localStorage.getItem(key) || '';
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const money = value => new Intl.NumberFormat('ru-RU').format(Number(value) || 0);
-  const localCatalog = [
-    { id: 'fighter', title: 'Боец', price: 50, role: 'fighter', tag: 'БОЕЦ', description: 'Название команды, расширенный кит, личный флаг и доступ к закрытым Discord-разделам.' },
-    { id: 'scout', title: 'Разведчик', price: 75, role: 'scout', tag: 'РАЗВЕДЧИК', description: 'Камуфляжный костюм, особое вооружение и обвесы, уникальный тег, команда, кит, флаг и Discord.' },
-    { id: 'commander', title: 'Командир', price: 150, role: 'commander', tag: 'КОМАНДИР', description: 'Уникальное вооружение, особая броня и лечение, камуфляж, тег, команда, расширенный кит, флаг и Discord.' }
-  ];
-  let catalog = localCatalog;
+  let catalog = [];
   let wallet = { balance: 0, transactions: [], orders: [] };
-  const walletKey = name => 'war-project-wallet:' + String(name || '').trim().toLowerCase();
-  const readLocalWallet = name => { try { return JSON.parse(localStorage.getItem(walletKey(name)) || '{}'); } catch { return {}; } };
-  const writeLocalWallet = (name, state) => localStorage.setItem(walletKey(name), JSON.stringify(state));
   const currentUser = async () => (await request('/account/me')).user;
 
   const request = async (path, options = {}) => {
     const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
     if (token()) headers.Authorization = 'Bearer ' + token();
     const response = await fetch(api + path, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || 'Ошибка сервера');
+    return data;
+  };
+
+  const walletRequest = async (path, options = {}) => {
+    const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
+    if (token()) headers.Authorization = 'Bearer ' + token();
+    const response = await fetch(walletApi + path, { ...options, headers });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(data.error || 'Ошибка сервера');
     return data;
@@ -93,40 +95,25 @@
 
   const loadWallet = async () => {
     if (!token()) { wallet = { balance: 0, transactions: [], orders: [] }; renderBalance(); renderCatalog(); renderHistory(); return; }
-    try {
-      const user = await currentUser();
-      const state = readLocalWallet(user.username);
-      wallet = { balance: Number(state.balance) || 0, transactions: state.transactions || [], orders: state.orders || [] };
-    } catch {
-      wallet = { balance: 0, transactions: [], orders: [] };
-    }
+    const data = await walletRequest('/wallet/me');
+    wallet = data.wallet || wallet;
     renderBalance();
     renderHistory();
   };
 
   const loadCatalog = async () => {
-    catalog = localCatalog;
+    const data = await walletRequest('/wallet/catalog');
+    catalog = data.items || [];
     renderCatalog();
   };
 
   async function purchase(itemId, button) {
     if (!token()) { location.hash = '#account'; document.querySelector('[data-open="#accountModal"]')?.click(); return; }
-    const item = catalog.find(entry => entry.id === itemId);
-    if (!item) return;
     button.disabled = true;
     setMessage('Покупка выполняется…');
     try {
-      const user = await currentUser();
-      const state = readLocalWallet(user.username);
-      const balance = Number(state.balance) || 0;
-      if (balance < item.price) throw new Error('Недостаточно WP Coins.');
-      const next = {
-        balance: balance - item.price,
-        transactions: [{ description: 'Покупка привилегии: ' + item.title, amount: -item.price, created_at: new Date().toISOString() }, ...(state.transactions || [])].slice(0, 20),
-        orders: [{ item_title: item.title, price: item.price, status: 'paid', created_at: new Date().toISOString() }, ...(state.orders || [])].slice(0, 20)
-      };
-      writeLocalWallet(user.username, next);
-      await request('/admin/commands', { method: 'POST', body: JSON.stringify({ action: 'role', nickname: user.username, role: item.role }) }).catch(() => {});
+      const data = await walletRequest('/wallet/purchase', { method: 'POST', body: JSON.stringify({ itemId }) });
+      wallet.balance = data.balance;
       await loadWallet();
       setMessage('Привилегия куплена. Команда выдачи отправлена на сервер.', 'success');
     } catch (error) {
