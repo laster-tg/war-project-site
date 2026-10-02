@@ -9,7 +9,7 @@
 </head>
 <body class="profile-page">
   <div class="page-grid"></div>
-  <header class="header wrap"><a class="brand" href="index.html" aria-label="На главную"><span>W</span><b>WAR PROJECT</b></a><nav class="profile-wallet-nav"><a class="wallet-nav" href="#wallet" data-wallet-auth hidden><span data-wallet-balance>—</span> <small>WP Coins</small></a><a class="profile-back" href="index.html">← НА ГЛАВНУЮ</a></nav></header>
+  <header class="header wrap"><a class="brand" href="index.html" aria-label="На главную"><span>W</span><b>WAR PROJECT</b></a><nav class="profile-wallet-nav"><a class="wallet-nav" href="#wallet" data-wallet-auth hidden><span data-wallet-balance>—</span><video class="wallet-nav-coin" src="assets/coin_spin.gif.mp4" autoplay loop muted playsinline aria-label="WP Coins"></video></a><a class="profile-back" href="index.html">← НА ГЛАВНУЮ</a></nav></header>
   <main class="profile-wrap wrap">
     <section class="profile-hero" id="profileContent" hidden>
       <p class="kicker">WAR PROJECT ID / ПРОФИЛЬ ИГРОКА</p>
@@ -23,7 +23,7 @@
       </div><label class="primary" style="display:inline-block;margin:20px 0;cursor:pointer">ЗАГРУЗИТЬ СКИН MINECRAFT<input id="skinInput" type="file" accept="image/png" hidden></label><p id="skinStatus" class="form-message"></p><a class="primary" id="adminLink" href="admin.html" hidden>ПАНЕЛЬ УПРАВЛЕНИЯ →</a>
       <section class="wallet-panel" id="wallet" aria-labelledby="walletTitle">
         <div class="wallet-heading"><div><p class="kicker">ВАЛЮТА ПРОЕКТА</p><h2 id="walletTitle">КОШЕЛЁК</h2></div><button class="wallet-refresh" type="button" data-wallet-refresh>Обновить</button></div>
-        <div class="wallet-balance-card"><span>ДОСТУПНО ДЛЯ ПОКУПОК</span><strong><span data-wallet-balance>—</span> <small>WP Coins</small></strong><a class="primary" href="index.html#privileges">Купить привилегию →</a></div>
+        <div class="wallet-balance-card"><span>ДОСТУПНО ДЛЯ ПОКУПОК</span><strong><span data-wallet-balance>—</span><video class="wallet-nav-coin" src="assets/coin_spin.gif.mp4" autoplay loop muted playsinline aria-label="WP Coins"></video></strong><a class="primary" href="index.html#privileges">Купить привилегию →</a></div>
         <p class="wallet-help">Для пополнения обратись к владельцу или техадмину.</p><p class="form-message" id="walletMessage" aria-live="polite"></p>
         <div class="wallet-history"><section aria-labelledby="walletOrdersTitle"><h3 id="walletOrdersTitle">МОИ ПРИВИЛЕГИИ</h3><div id="walletOrders"><p class="wallet-empty">Загружаем покупки…</p></div></section><section aria-labelledby="walletTransactionsTitle"><h3 id="walletTransactionsTitle">ИСТОРИЯ WP COINS</h3><div id="walletTransactions"><p class="wallet-empty">Загружаем операции…</p></div></section></div>
       </section><button class="logout" id="profileLogout" type="button">ВЫЙТИ ИЗ АККАУНТА</button>
@@ -32,6 +32,7 @@
   </main>
   <script src="api-config-prod.js?v=11"></script><script src="wallet.js?v=1"></script><script src="profile.js?v=12"></script>
 </body></html>
+
 
 
 
