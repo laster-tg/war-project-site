@@ -21,6 +21,7 @@
     const avatar = $('#profileAvatar');
     const initial = avatar.querySelector('.avatar-initial'); initial.replaceChildren();
     if (typeof user.avatarData === 'string' && /^data:image\/(png|jpeg|webp);base64,/i.test(user.avatarData)) { const image = new Image(); image.src = user.avatarData; image.alt = ''; initial.append(image); } else initial.textContent = user.username.slice(0, 1).toUpperCase();
+    window.dispatchEvent(new CustomEvent('auth:changed', { detail: { user } }));
   };
   const resizeAvatar = file => new Promise((resolve, reject) => {
     if (!/^image\/(png|jpeg|webp)$/.test(file.type)) return reject(new Error('Выбери PNG, JPG или WEBP.'));
@@ -43,8 +44,8 @@
     };
     reader.readAsDataURL(file);
   });
-  const load = async () => { if (!token()) return; try { render((await request('/account/me')).user); } catch { sessionStorage.removeItem(key); localStorage.removeItem(key); } };
-  $('#profileLogout').addEventListener('click', () => { sessionStorage.removeItem(key); localStorage.removeItem(key); location.href = 'index.html'; });
+  const load = async () => { if (!token()) return; try { render((await request('/account/me')).user); } catch { sessionStorage.removeItem(key); localStorage.removeItem(key); window.dispatchEvent(new CustomEvent('auth:changed', { detail: { user: null } })); } };
+  $('#profileLogout').addEventListener('click', () => { sessionStorage.removeItem(key); localStorage.removeItem(key); window.dispatchEvent(new CustomEvent('auth:changed', { detail: { user: null } })); location.href = 'index.html'; });
   $('#avatarInput').addEventListener('change', async event => {
     const input = event.currentTarget; const file = input.files && input.files[0]; if (!file || !token()) return;
     const avatar = $('#profileAvatar'); avatar.classList.add('saving');
@@ -54,6 +55,7 @@
     } catch (error) { alert(error.message || 'Не удалось изменить аватар.'); }
     finally { input.value = ''; avatar.classList.remove('saving'); }
   });
+  $('#skinInput').addEventListener('change', async event => { const file = event.currentTarget.files?.[0]; if (!file || !token()) return; if (file.type !== 'image/png' || file.size > 128 * 1024) { $('#skinStatus').textContent = 'Нужен PNG до 128 КБ.'; return; } const reader = new FileReader(); reader.onload = async () => { try { const response = await request('/account/skin', { method: 'POST', body: JSON.stringify({ skinData: String(reader.result) }) }); render(response.user); $('#skinStatus').textContent = 'Скин сохранён.'; } catch (error) { $('#skinStatus').textContent = error.message || 'Не удалось сохранить скин.'; } }; reader.readAsDataURL(file); event.currentTarget.value = ''; });
   load();
 })();
 

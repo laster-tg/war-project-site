@@ -5,10 +5,11 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://war-project-api.goverussia.workers.dev; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
   <meta name="theme-color" content="#080d0c"><title>Профиль — War Project</title>
   <link rel="stylesheet" href="style-v8.css?v=8">
+  <link rel="stylesheet" href="wallet.css?v=1">
 </head>
 <body class="profile-page">
   <div class="page-grid"></div>
-  <header class="header wrap"><a class="brand" href="index.html" aria-label="На главную"><span>W</span><b>WAR PROJECT</b></a><a class="profile-back" href="index.html">← НА ГЛАВНУЮ</a></header>
+  <header class="header wrap"><a class="brand" href="index.html" aria-label="На главную"><span>W</span><b>WAR PROJECT</b></a><nav class="profile-wallet-nav"><a class="wallet-nav" href="#wallet" data-wallet-auth hidden><span data-wallet-balance>—</span> <small>WP Coins</small></a><a class="profile-back" href="index.html">← НА ГЛАВНУЮ</a></nav></header>
   <main class="profile-wrap wrap">
     <section class="profile-hero" id="profileContent" hidden>
       <p class="kicker">WAR PROJECT ID / ПРОФИЛЬ ИГРОКА</p>
@@ -19,11 +20,17 @@
         <article><span>ПОСТОЯННЫЙ ID</span><code id="accountId">—</code><small>Этот ID закреплён за аккаунтом и не меняется.</small></article>
         <article><span>НИК В ИГРЕ</span><strong id="accountNick">—</strong><small>Используется на сайте и в лаунчере.</small></article>
         <article><span>СТАТУС</span><strong id="accountRole">Игрок</strong><small>Уровень доступа War Project.</small></article>
-      </div><a class="primary" id="adminLink" href="admin.html" hidden>ПАНЕЛЬ УПРАВЛЕНИЯ →</a><button class="logout" id="profileLogout" type="button">ВЫЙТИ ИЗ АККАУНТА</button>
+      </div><label class="primary" style="display:inline-block;margin:20px 0;cursor:pointer">ЗАГРУЗИТЬ СКИН MINECRAFT<input id="skinInput" type="file" accept="image/png" hidden></label><p id="skinStatus" class="form-message"></p><a class="primary" id="adminLink" href="admin.html" hidden>ПАНЕЛЬ УПРАВЛЕНИЯ →</a>
+      <section class="wallet-panel" id="wallet" aria-labelledby="walletTitle">
+        <div class="wallet-heading"><div><p class="kicker">ВАЛЮТА ПРОЕКТА</p><h2 id="walletTitle">КОШЕЛЁК</h2></div><button class="wallet-refresh" type="button" data-wallet-refresh>Обновить</button></div>
+        <div class="wallet-balance-card"><span>ДОСТУПНО ДЛЯ ПОКУПОК</span><strong><span data-wallet-balance>—</span> <small>WP Coins</small></strong><a class="primary" href="index.html#privileges">Купить привилегию →</a></div>
+        <p class="wallet-help">Для пополнения обратись к владельцу или техадмину.</p><p class="form-message" id="walletMessage" aria-live="polite"></p>
+        <div class="wallet-history"><section aria-labelledby="walletOrdersTitle"><h3 id="walletOrdersTitle">МОИ ПРИВИЛЕГИИ</h3><div id="walletOrders"><p class="wallet-empty">Загружаем покупки…</p></div></section><section aria-labelledby="walletTransactionsTitle"><h3 id="walletTransactionsTitle">ИСТОРИЯ WP COINS</h3><div id="walletTransactions"><p class="wallet-empty">Загружаем операции…</p></div></section></div>
+      </section><button class="logout" id="profileLogout" type="button">ВЫЙТИ ИЗ АККАУНТА</button>
     </section>
     <section class="profile-locked" id="profileLocked"><p class="kicker">WAR PROJECT ID</p><h1>НУЖЕН ВХОД</h1><p>Войди через главную страницу, чтобы открыть свой профиль.</p><a class="primary" href="index.html#account">ВОЙТИ В АККАУНТ →</a></section>
   </main>
-  <script src="api-config.js?v=10"></script><script src="profile.js?v=11"></script>
+  <script src="api-config.js?v=11"></script><script src="wallet.js?v=1"></script><script src="profile.js?v=12"></script>
 </body></html>
 
 
