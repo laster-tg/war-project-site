@@ -1,8 +1,8 @@
-version: 0.2.15
+version: 0.2.16
 files:
-  - url: https://github.com/laster-tg/war-project-site/releases/download/v0.2.15/War-Project-Launcher-0.2.15-Setup.exe
-    sha512: 8kBZVPkFTOH5lCGtJax1n+QtdBEKfP95eaYyxOQSV1SMhQCqSp1/OTmVqGtFL/HZSmA67Gk2IfFg/x1xZ0Nf2Q==
-    size: 405860609
-path: https://github.com/laster-tg/war-project-site/releases/download/v0.2.15/War-Project-Launcher-0.2.15-Setup.exe
-sha512: 8kBZVPkFTOH5lCGtJax1n+QtdBEKfP95eaYyxOQSV1SMhQCqSp1/OTmVqGtFL/HZSmA67Gk2IfFg/x1xZ0Nf2Q==
-releaseDate: '2026-10-02T21:01:46.952Z'
+  - url: https://github.com/laster-tg/war-project-site/releases/download/v0.2.16/War-Project-Launcher-0.2.16-Setup.exe
+    sha512: H5XUEqszvTDPYSr/pEdiF2HnUHk5ulanvVAyOjjPcn9a11prtKnw5czNRoqkcyYkUC4PwFA/ZLXpmurldbecVQ==
+    size: 407095364
+path: https://github.com/laster-tg/war-project-site/releases/download/v0.2.16/War-Project-Launcher-0.2.16-Setup.exe
+sha512: H5XUEqszvTDPYSr/pEdiF2HnUHk5ulanvVAyOjjPcn9a11prtKnw5czNRoqkcyYkUC4PwFA/ZLXpmurldbecVQ==
+releaseDate: '2026-10-02T21:12:38.953Z'
