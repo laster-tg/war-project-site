@@ -124,11 +124,11 @@
   }
 
   window.WarProjectWallet = { load: loadWallet, catalog: loadCatalog };
-  window.addEventListener('auth:changed', () => { loadWallet().catch(() => {}); renderCatalog(); });
+  window.addEventListener('auth:changed', () => { loadWallet().catch(error => setMessage(error.message || 'Не удалось загрузить кошелёк.', 'error')); renderCatalog(); });
   document.addEventListener('click', event => {
     if (event.target.closest('[data-wallet-refresh]')) loadWallet().catch(error => setMessage(error.message, 'error'));
   });
 
-  loadCatalog().catch(() => {});
-  loadWallet().catch(() => {});
+  loadCatalog().catch(error => setMessage(error.message || 'Не удалось загрузить привилегии.', 'error'));
+  loadWallet().catch(error => setMessage(error.message || 'Не удалось загрузить кошелёк.', 'error'));
 })();
