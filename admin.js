@@ -15,3 +15,4 @@ $$('form[data-wallet-grant]').forEach(form=>form.addEventListener('submit',event
 updateStatus();setInterval(updateStatus,10000);
 })();
 
+
