@@ -38,6 +38,7 @@
     $('#accountModal').classList.remove('signed-in');
     $('#authForm').hidden = false;
     $('#profilePanel').hidden = true;
+    window.dispatchEvent(new CustomEvent('auth:changed', { detail: { user: null } }));
   };
   const applyProfile = user => {
     if (!user || typeof user.username !== 'string') return signedOut();
@@ -55,6 +56,7 @@
     $('#profileId').textContent = String(user.id || '—').replace(/[^0-9]/g, '').slice(0, 9) || '—';
     $('#authForm').hidden = true;
     $('#profilePanel').hidden = false;
+    window.dispatchEvent(new CustomEvent('auth:changed', { detail: { user } }));
   };
   const loadProfile = async () => {
     if (!token()) return signedOut();
