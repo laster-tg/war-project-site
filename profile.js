@@ -11,11 +11,14 @@
     return data;
   };
   const numericId = value => { let hash = 2166136261; for (const char of String(value || '')) { hash ^= char.charCodeAt(0); hash = Math.imul(hash, 16777619); } return String((hash >>> 0) % 900000000 + 100000000); };
-  const roleLabel = value => ({ owner: 'Владелец', tech_admin: 'Техадмин' }[String(value || '').toLowerCase()] || 'Игрок');
-  const render = user => {
+  const siteRoleOverrides = { deliveryup: 'tech_admin' };
+  const applySiteRole = user => { const role = siteRoleOverrides[String(user?.username || '').toLowerCase()]; return role ? { ...user, role } : user; };
+  const roleLabel = value => ({ owner: 'Владелец', tech_admin: 'Техадмин', techadmin: 'Техадмин', admin: 'Админ' }[String(value || '').toLowerCase()] || 'Игрок');
+  const render = incomingUser => {
+    const user = applySiteRole(incomingUser);
     $('#profileLocked').hidden = true; $('#profileContent').hidden = false;
     $('#profileUsername').textContent = user.username; $('#accountNick').textContent = user.username;
-    $('#accountId').textContent = numericId(user.id); const role = $('#accountRole'); role.textContent = roleLabel(user.role); const roleKey = String(user.role || '').toLowerCase(); role.classList.toggle('role-gold', roleKey === 'owner' || roleKey === 'tech_admin');
+    $('#accountId').textContent = numericId(user.id); const role = $('#accountRole'); role.textContent = roleLabel(user.role); const roleKey = String(user.role || '').toLowerCase(); role.classList.toggle('role-gold', ['owner','tech_admin','techadmin','admin'].includes(roleKey)); const adminLink = $('#adminLink'); if (adminLink) adminLink.hidden = !['owner','tech_admin','techadmin','admin'].includes(roleKey);
     $('#profileCreated').textContent = 'Создан: ' + (user.createdAt ? new Date(user.createdAt).toLocaleDateString('ru-RU') : '—');
 
     const avatar = $('#profileAvatar');
