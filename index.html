@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#080d0c">
   <meta name="description" content="War Project — лаунчер, игровой аккаунт и центр поддержки.">
   <title>War Project — игровая база</title>
-  <link rel="stylesheet" href="style-v8.css?v=6">
+  <link rel="stylesheet" href="style-v8.css?v=8">
   <link rel="stylesheet" href="wallet.css?v=5">
 </head>
 <body>
@@ -17,7 +17,7 @@
     <nav class="nav" aria-label="Навигация">
       <a href="rules.html">Правила</a><a href="#start">Начать</a><a href="#privileges">Привилегии</a><a href="#support">Поддержка</a>
       <a class="wallet-nav" href="profile.html#wallet" data-wallet-auth hidden><span data-wallet-balance>—</span><video class="wallet-nav-coin" src="assets/coin_spin.gif.mp4" autoplay loop muted playsinline aria-label="WP Coins"></video></a>
-      <button class="account-button" data-open="#accountModal"><i></i><span id="accountNav">Аккаунт</span></button>
+      <button class="account-button" data-open="#accountModal"><span class="account-nav-avatar" id="accountNavAvatar" aria-hidden="true"></span><span id="accountNav">Аккаунт</span><b class="account-nav-caret">⌃</b></button>
     </nav>
   </header>
   <main class="wrap" id="top">
@@ -71,10 +71,12 @@
     </nav>
     <span>КЛИЕНТ 0.1.0</span>
   </footer>
-  <div class="modal account-modal" id="accountModal" aria-hidden="true"><section class="modal-box" role="dialog" aria-modal="true" aria-labelledby="accountTitle"><button class="close" data-close aria-label="Закрыть">×</button><p class="kicker">ИГРОВОЙ ПРОФИЛЬ</p><h2 id="accountTitle">WAR PROJECT ID</h2><p class="modal-lead">Один аккаунт для сайта, лаунчера и обращений. Пароль отправляется только в защищённый API аккаунтов.</p><div class="auth-tabs"><button class="active" data-auth-tab="login">Войти</button><button data-auth-tab="register">Регистрация</button></div><form id="authForm" novalidate><label for="authUsername">Игровой ник</label><input id="authUsername" autocomplete="username" required minlength="3" maxlength="24" placeholder="3–24 символа: буквы, цифры, _"><label for="authPassword">Пароль</label><input id="authPassword" type="password" autocomplete="current-password" required minlength="10" placeholder="Минимум 10 символов"><div id="confirmRow" hidden><label for="authConfirm">Повтори пароль</label><input id="authConfirm" type="password" autocomplete="new-password" placeholder="Повтори пароль"></div><div id="twoFactorLoginRow" hidden><label for="authTwoFactor">Код Google Authenticator</label><input id="authTwoFactor" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000"></div><div class="form-message" id="authMessage" aria-live="polite"></div><button class="primary" id="authSubmit" type="submit">Войти →</button></form><div id="profilePanel" hidden><div class="profile-line"><span id="profileInitial">W</span><div><b id="profileName">Игрок</b><small>ПОСТОЯННЫЙ WAR PROJECT ID</small><code id="profileId">—</code></div></div><a class="primary profile-page-link" href="profile.html">Открыть полный профиль →</a><label class="avatar-upload">Изменить аватарку<input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp"></label><button class="logout" id="logoutButton" type="button">Выйти из аккаунта</button></div></section></div>
+  <div class="modal account-modal" id="accountModal" aria-hidden="true"><section class="modal-box" role="dialog" aria-modal="true" aria-labelledby="accountTitle"><button class="close" data-close aria-label="Закрыть">×</button><p class="kicker">ИГРОВОЙ ПРОФИЛЬ</p><h2 id="accountTitle">WAR PROJECT ID</h2><p class="modal-lead">Один аккаунт для сайта, лаунчера и обращений. Пароль отправляется только в защищённый API аккаунтов.</p><div class="auth-tabs"><button class="active" data-auth-tab="login">Войти</button><button data-auth-tab="register">Регистрация</button></div><form id="authForm" novalidate><label for="authUsername">Игровой ник</label><input id="authUsername" autocomplete="username" required minlength="3" maxlength="24" placeholder="3–24 символа: буквы, цифры, _"><label for="authPassword">Пароль</label><input id="authPassword" type="password" autocomplete="current-password" required minlength="10" placeholder="Минимум 10 символов"><div id="confirmRow" hidden><label for="authConfirm">Повтори пароль</label><input id="authConfirm" type="password" autocomplete="new-password" placeholder="Повтори пароль"></div><div id="twoFactorLoginRow" hidden><label for="authTwoFactor">Код Google Authenticator</label><input id="authTwoFactor" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000"></div><div class="form-message" id="authMessage" aria-live="polite"></div><button class="primary" id="authSubmit" type="submit">Войти →</button></form><div id="profilePanel" hidden><div class="profile-line"><span id="profileInitial">W</span><div><b id="profileName">Игрок</b><small>ПОСТОЯННЫЙ WAR PROJECT ID</small><code id="profileId">—</code></div></div><nav class="profile-dropdown-menu" aria-label="Меню профиля"><a class="profile-page-link" href="profile.html"><b>⚙</b>Профиль</a><a href="profile.html#wallet"><b>☻</b>Подписки</a><a href="https://discord.gg/WyPWW98Q4u" target="_blank" rel="noopener noreferrer"><b>🎮</b><span>Link<br>Discord</span></a><button class="logout" id="logoutButton" type="button"><b>↪</b>Выход</button></nav><label class="avatar-upload" hidden>Изменить аватарку<input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp"></label></div></section></div>
   <div class="modal" id="supportModal" aria-hidden="true"><form class="modal-box" id="requestForm" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="close" data-close type="button" aria-label="Закрыть">×</button><p class="kicker">НОВАЯ ЗАЯВКА</p><h2 id="modalTitle">ЦЕНТР ПОДДЕРЖКИ</h2><p class="modal-lead">Опиши ситуацию. Для отправки нужен War Project ID.</p><input id="requestType" type="hidden"><label for="requestDetails">Комментарий</label><textarea id="requestDetails" required maxlength="500" placeholder="Коротко опиши ситуацию"></textarea><div class="form-message" id="supportMessage" aria-live="polite"></div><button class="primary" type="submit">Отправить заявку →</button></form></div>
-  <script src="api-config-prod.js?v=12"></script><script src="wallet.js?v=5"></script><script src="app-v8.js?v=10"></script>
+  <script src="api-config-prod.js?v=12"></script><script src="wallet.js?v=5"></script><script src="app-v8.js?v=12"></script>
 </body></html>
+
+
 
 
 
