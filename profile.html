@@ -4,8 +4,8 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://war-project-api.goverussia.workers.dev https://war-project-api.war-project-api.workers.dev; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
   <meta name="theme-color" content="#080d0c"><title>Профиль — War Project</title>
-  <link rel="stylesheet" href="style-v8.css?v=8">
-  <link rel="stylesheet" href="wallet.css?v=5">
+  <link rel="stylesheet" href="style-v8.css?v=9">
+  <link rel="stylesheet" href="wallet.css?v=6">
 </head>
 <body class="profile-page">
   <div class="page-grid"></div>
@@ -13,14 +13,14 @@
   <main class="profile-wrap wrap">
     <section class="profile-hero" id="profileContent" hidden>
       <p class="kicker">WAR PROJECT ID / ПРОФИЛЬ ИГРОКА</p>
-      <div class="profile-head"><label class="profile-avatar" id="profileAvatar" title="Изменить аватар">
+      <div class="profile-head"><div class="profile-identity"><label class="profile-avatar" id="profileAvatar" title="Изменить аватар">
         <span class="avatar-initial">W</span><span class="avatar-change">ИЗМЕНИТЬ<br>АВАТАР</span><input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp" aria-label="Выбрать новую аватарку">
-      </label><div><h1 id="profileUsername">ИГРОК</h1><p id="profileCreated">Создан: —</p></div></div>
+      </label><div><h1 id="profileUsername">ИГРОК</h1><p id="profileCreated">Создан: —</p></div></div><div class="profile-actions"><label class="primary skin-upload">ЗАГРУЗИТЬ СКИН MINECRAFT<input id="skinInput" type="file" accept="image/png" hidden></label><a class="primary admin-action" id="adminLink" href="admin.html" hidden>ПАНЕЛЬ УПРАВЛЕНИЯ →</a><p id="skinStatus" class="form-message"></p></div></div>
       <div class="profile-grid">
-        <article><span>ПОСТОЯННЫЙ ID</span><code id="accountId">—</code><small>Этот ID закреплён за аккаунтом и не меняется.</small></article>
+        <article class="id-card"><span>ПОСТОЯННЫЙ ID</span><code id="accountId">—</code><small>Закреплён за аккаунтом и не меняется.</small></article>
         <article><span>НИК В ИГРЕ</span><strong id="accountNick">—</strong><small>Используется на сайте и в лаунчере.</small></article>
-        <article><span>СТАТУС</span><strong id="accountRole">Игрок</strong><small>Уровень доступа War Project.</small></article>
-      </div><label class="primary" style="display:inline-block;margin:20px 0;cursor:pointer">ЗАГРУЗИТЬ СКИН MINECRAFT<input id="skinInput" type="file" accept="image/png" hidden></label><p id="skinStatus" class="form-message"></p><a class="primary" id="adminLink" href="admin.html" hidden>ПАНЕЛЬ УПРАВЛЕНИЯ →</a>
+        <article class="status-card"><span>СТАТУС</span><strong id="accountRole">Игрок</strong><small>Уровень доступа War Project.</small></article>
+      </div>
       <section class="wallet-panel" id="wallet" aria-labelledby="walletTitle">
         <div class="wallet-heading"><div><p class="kicker">ВАЛЮТА ПРОЕКТА</p><h2 id="walletTitle">КОШЕЛЁК</h2></div><button class="wallet-refresh" type="button" data-wallet-refresh>Обновить</button></div>
         <div class="wallet-balance-card"><span>ДОСТУПНО ДЛЯ ПОКУПОК</span><strong><span data-wallet-balance>—</span><video class="wallet-nav-coin" src="assets/coin_spin.gif.mp4" autoplay loop muted playsinline aria-label="WP Coins"></video></strong><a class="primary" href="index.html#privileges">Купить привилегию →</a></div>
@@ -30,8 +30,10 @@
     </section>
     <section class="profile-locked" id="profileLocked"><p class="kicker">WAR PROJECT ID</p><h1>НУЖЕН ВХОД</h1><p>Войди через главную страницу, чтобы открыть свой профиль.</p><a class="primary" href="index.html#account">ВОЙТИ В АККАУНТ →</a></section>
   </main>
-  <script src="api-config-prod.js?v=12"></script><script src="wallet.js?v=5"></script><script src="profile.js?v=13"></script>
+  <script src="api-config-prod.js?v=12"></script><script src="wallet.js?v=6"></script><script src="profile.js?v=14"></script>
 </body></html>
+
+
 
 
 
