@@ -53,7 +53,6 @@
       image.alt = '';
       avatar.append(image);
     } else avatar.textContent = user.username.slice(0, 1).toUpperCase();
-    const navAvatar = document.querySelector("#accountNavAvatar"); if (navAvatar) { navAvatar.replaceChildren(); const currentImage = avatar.querySelector("img"); if (currentImage) navAvatar.append(currentImage.cloneNode()); else navAvatar.textContent = user.username.slice(0, 1).toUpperCase(); }
     $('#profileId').textContent = String(user.id || '—').replace(/[^0-9]/g, '').slice(0, 9) || '—';
     $('#authForm').hidden = true;
     $('#profilePanel').hidden = false;
@@ -177,6 +176,4 @@
   if (location.hash === '#account') open('#accountModal');
   if (location.hash === '#support') open('#supportModal');
 })();
-
-
 
