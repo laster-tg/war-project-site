@@ -125,3 +125,19 @@ a,button,label[for],input[type="file"],select{cursor:url("data:image/svg+xml,%3C
 .footer-socials svg{display:block;width:24px;height:24px}
 .footer-socials a:hover{color:var(--acid);border-color:var(--acid);background:#16251c}
 .footer-socials a:focus-visible{color:var(--acid);outline:2px solid var(--acid);outline-offset:4px}
+
+/* War Project account dropdown/card */
+.account-modal{align-items:flex-start;justify-content:flex-end;padding-top:92px;padding-right:max(20px,calc((100vw - 1240px)/2));background:rgba(1,5,3,.38);backdrop-filter:blur(3px)}
+.account-modal .modal-box{width:min(416px,calc(100vw - 28px));padding:26px 27px 27px;border:1px solid #5b7b70;background:linear-gradient(155deg,rgba(12,25,20,.98),rgba(7,14,11,.98));box-shadow:0 18px 70px rgba(0,0,0,.62),inset 0 0 0 1px rgba(186,255,57,.035)}
+.account-modal .close{right:18px;top:13px;color:#b8c9c0;font:900 28px/1 Arial,sans-serif;transition:color .14s,transform .14s}.account-modal .close:hover{color:var(--acid);transform:scale(1.08)}
+.account-modal .kicker{font:400 9px/1.4 "War Pixel",monospace;letter-spacing:.12em;color:#9aaca4}.account-modal .kicker:before{width:5px;height:5px;margin-right:9px;background:var(--orange)}
+.account-modal #accountTitle{margin:8px 0 18px;font:400 48px/.86 "War Pixel",monospace!important;letter-spacing:.055em!important;color:var(--ink)}
+.account-modal:not(.signed-in) #accountTitle{font-size:40px!important;line-height:1.02!important}.account-modal:not(.signed-in) .modal-lead{font-size:11px;line-height:1.55}
+.account-modal.signed-in .modal-lead,.account-modal.signed-in .auth-tabs{display:none!important}.account-modal.signed-in #accountTitle{max-width:335px;margin-bottom:19px}
+.account-modal #profilePanel{margin-top:0}.account-modal .profile-line{position:relative;display:flex;align-items:center;gap:12px;margin:0 0 22px;padding:12px;border:1px solid #29453b;background:rgba(5,14,10,.58)}
+.account-modal .profile-line span{width:52px;height:52px;flex:0 0 52px;border:1px solid rgba(186,255,57,.25);background:#15251c;color:var(--acid);font:400 17px/1 "War Pixel",monospace}.account-modal .profile-line img{width:100%;height:100%;object-fit:cover;background:#0a120f}
+.account-modal .profile-line b{display:block;color:var(--ink);font:400 15px/1.1 "War Pixel",monospace;letter-spacing:.055em;text-transform:none}.account-modal .profile-line small{display:block;margin-top:6px;color:#a7b7ae;font:400 7px/1.2 "War Pixel",monospace;letter-spacing:.05em}.account-modal .profile-line code{display:block;margin-top:5px;color:var(--acid);font:400 8px/1.2 "War Pixel",monospace;letter-spacing:.05em}
+.account-modal .profile-page-link{width:212px;min-height:38px;margin:0 0 15px;padding:13px 16px;justify-content:center;font-size:9px;letter-spacing:.05em;clip-path:polygon(0 0,91% 0,100% 24%,100% 100%,0 100%)}
+.account-modal .avatar-upload{display:flex;align-items:center;justify-content:center;min-height:35px;margin:0 0 14px;border:1px dashed #52766a;background:rgba(5,14,10,.24);color:var(--acid);font:400 9px/1 "War Pixel",monospace;letter-spacing:.04em;text-align:center;text-transform:uppercase}.account-modal .avatar-upload:hover{border-color:var(--acid);background:rgba(186,255,57,.06)}
+.account-modal .logout{width:100%;min-height:30px;margin:0;padding:8px 12px;border:1px solid #815548;background:rgba(255,112,67,.025);color:#ff9b86;font:400 9px/1 "War Pixel",monospace;letter-spacing:.04em}.account-modal .logout:hover{border-color:#ff8d70;background:rgba(255,112,67,.08)}
+@media(max-width:720px){.account-modal{align-items:flex-start;justify-content:center;padding:78px 14px 14px}.account-modal #accountTitle{font-size:38px!important}.account-modal .modal-box{padding:24px 22px}}
