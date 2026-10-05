@@ -122,6 +122,7 @@
     };
     reader.readAsDataURL(file);
   });
+  $('#profileInitial')?.addEventListener('click', () => { if ($('#accountModal').classList.contains('signed-in')) $('#avatarInput')?.click(); });
   $('#avatarInput').addEventListener('change', async event => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -176,4 +177,7 @@
   if (location.hash === '#account') open('#accountModal');
   if (location.hash === '#support') open('#supportModal');
 })();
+
+
+
 
