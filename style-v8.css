@@ -345,3 +345,7 @@ a,button,label[for],input[type="file"],select{cursor:url("data:image/svg+xml,%3C
 .nav{margin-left:auto}
 .nav-main{position:absolute;left:50%;top:50%;display:flex;align-items:center;gap:28px;transform:translate(-50%,-50%);white-space:nowrap}
 @media(max-width:720px){.nav-main{display:none}}
+
+/* Larger hero slogan after removing the version label */
+@media(min-width:721px){.hero h1{font-size:clamp(4.5rem,7vw,8.5rem)!important;max-width:1100px}}
+@media(max-width:720px){.hero h1{font-size:clamp(48px,17vw,76px)!important}}
