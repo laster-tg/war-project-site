@@ -24,6 +24,10 @@
     modal.setAttribute('aria-hidden', 'true');
   });
   const open = selector => {
+    if (selector === '#accountModal' && token()) {
+      window.location.assign('profile.html');
+      return;
+    }
     const modal = $(selector);
     if (!modal) return;
     modal.classList.add('show');
