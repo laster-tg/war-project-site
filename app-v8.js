@@ -43,6 +43,9 @@
   };
   const signedOut = () => {
     $('#accountNav').textContent = 'Аккаунт';
+    const navAvatar = $('#accountAvatar');
+    navAvatar?.replaceChildren();
+    if (navAvatar) navAvatar.textContent = 'A';
     $('#accountModal').classList.remove('signed-in');
     $('#authForm').hidden = false;
     $('#profilePanel').hidden = true;
@@ -54,13 +57,23 @@
     $('#accountModal').classList.add('signed-in');
     $('#profileName').textContent = user.username;
     const avatar = $('#profileInitial');
+    const navAvatar = $('#accountAvatar');
     avatar.replaceChildren();
+    navAvatar?.replaceChildren();
     if (typeof user.avatarData === 'string' && /^data:image\/(png|jpeg|webp);base64,/i.test(user.avatarData)) {
       const image = new Image();
       image.src = user.avatarData;
       image.alt = '';
       avatar.append(image);
-    } else avatar.textContent = user.username.slice(0, 1).toUpperCase();
+      const navImage = new Image();
+      navImage.src = user.avatarData;
+      navImage.alt = '';
+      navAvatar?.append(navImage);
+    } else {
+      const initial = user.username.slice(0, 1).toUpperCase();
+      avatar.textContent = initial;
+      if (navAvatar) navAvatar.textContent = initial;
+    }
     $('#profileId').textContent = String(user.id || '—').replace(/[^0-9]/g, '').slice(0, 9) || '—';
     $('#authForm').hidden = true;
     $('#profilePanel').hidden = false;
