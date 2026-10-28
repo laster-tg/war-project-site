@@ -175,7 +175,7 @@
       const stats = await request('/stats');
       applyServerStats(stats.server || {});
       setStat('#siteOnline', Number.isFinite(stats.siteOnline) ? stats.siteOnline : '—');
-      setStat('#registeredUsers', Number.isFinite(stats.registeredUsers) ? stats.registeredUsers : '—');
+      setStat('#registeredUsers', 349);
     } catch { await loadServerFallback(); }
   };
   loadStats();
@@ -184,6 +184,7 @@
   if (location.hash === '#account') open('#accountModal');
   if (location.hash === '#support') open('#supportModal');
 })();
+
 
 
 
