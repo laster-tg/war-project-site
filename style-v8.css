@@ -347,8 +347,8 @@ a,button,label[for],input[type="file"],select{cursor:url("data:image/svg+xml,%3C
 @media(max-width:720px){.nav-main{display:none}}
 
 /* Larger hero slogan after removing the version label */
-@media(min-width:721px){.hero h1{font-size:clamp(4rem,5.8vw,7.2rem)!important;max-width:980px}}
-@media(max-width:720px){.hero h1{font-size:clamp(44px,15vw,64px)!important}}
+@media(min-width:721px){.hero h1{font-size:clamp(3.5rem,4.8vw,6.2rem)!important;max-width:900px}}
+@media(max-width:720px){.hero h1{font-size:clamp(40px,13.5vw,56px)!important}}
 
 /* Hide the retired version label even while an older HTML document is cached */
 .hero .kicker{display:none!important}
