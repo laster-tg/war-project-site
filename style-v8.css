@@ -222,6 +222,23 @@ a,button,label[for],input[type="file"],select{cursor:url("data:image/svg+xml,%3C
 .account-modal .profile-page-link{clip-path:none!important}
 @media(max-width:520px){.primary,.text-button{width:100%}}
 
+.account-button{gap:9px!important;padding:8px 13px 8px 9px!important}
+.account-avatar{
+  display:grid;
+  place-items:center;
+  width:25px;
+  height:25px;
+  flex:0 0 25px;
+  overflow:hidden;
+  border:1px solid #587264;
+  border-radius:50%;
+  background:#182820;
+  color:var(--acid);
+  font:400 9px/1 "War Pixel",monospace;
+}
+.account-avatar img{width:100%;height:100%;display:block;object-fit:cover}
+.account-button:hover .account-avatar{border-color:#09110d;background:#09110d;color:var(--acid)}
+
 /* Long support request names must stay inside the modal. */
 #supportModal .modal-box{overflow:hidden}
 #supportModal #modalTitle{
