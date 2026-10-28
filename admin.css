@@ -2,5 +2,23 @@
 
 #adminAccessError{display:block;margin-top:10px;color:#ff8f83;font:9px 'War Pixel',monospace}
 
+@media(max-width:720px){
+  .admin-wrap{padding:18px 0 40px}
+  .admin-panel{padding:20px 14px}
+  .admin-panel h1{font-size:clamp(30px,11vw,48px)!important;line-height:.95!important;margin:16px 0 24px}
+  .admin-nav{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .admin-nav a{min-height:44px;padding:10px 8px;text-align:center}
+  .admin-status{align-items:flex-start;flex-wrap:wrap;padding:12px;font-size:8px}
+  .admin-status small{width:100%;margin:4px 0 0 19px}
+  .admin-intro,.admin-routes,.operation-grid{grid-template-columns:1fr}
+  .admin-intro>div:first-child,.online-box,.operation-card{padding:18px 14px}
+  .admin-route{min-height:170px;padding:20px}
+  .page-heading{padding-top:20px}
+  .page-heading h2{font-size:clamp(25px,9vw,38px)}
+  .operation-card button{width:100%;min-height:48px;justify-self:stretch}
+  .broadcast-card{grid-column:auto;max-width:none}
+}
+
 .operation-card input,.operation-card select,.operation-card textarea{background:#09130f!important;color:var(--ink)!important;-webkit-text-fill-color:var(--ink)!important;box-shadow:0 0 0 1000px #09130f inset!important}.operation-card input:-webkit-autofill,.operation-card input:-webkit-autofill:hover,.operation-card input:-webkit-autofill:focus{background:#09130f!important;color:var(--ink)!important;-webkit-text-fill-color:var(--ink)!important;box-shadow:0 0 0 1000px #09130f inset!important;caret-color:var(--ink)!important}.operation-card input::selection{background:rgba(186,255,57,.28);color:#fff}
+
 
