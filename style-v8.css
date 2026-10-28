@@ -339,7 +339,9 @@ a,button,label[for],input[type="file"],select{cursor:url("data:image/svg+xml,%3C
 
 
 
-/* Header icon removed; keep the project name */
-.brand{display:flex!important}
-.brand span{display:none!important}
-.brand b{display:inline!important}
+/* Centered desktop navigation */
+.brand{display:none!important}
+.header{position:relative}
+.nav{margin-left:auto}
+.nav-main{position:absolute;left:50%;top:50%;display:flex;align-items:center;gap:28px;transform:translate(-50%,-50%);white-space:nowrap}
+@media(max-width:720px){.nav-main{display:none}}
